@@ -1,0 +1,111 @@
+---
+title: "Chicken Wheights Analysis "
+output: "html_document"
+author: "Tahani AlHarbi"
+date: "04/10/2020"
+---
+
+
+
+#### **Description:**
+
+An experiment was conducted to measure and compare the effectiveness of various feed 
+ supplements on the growth rate of chickens.
+```{r}
+
+```
+
+
+
+```{r chickwts, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+```
+
+
+
+
+
+
+#####  To get better known of our dataset:
+
+#### **Data head**: 
+
+```{r}
+knitr::kable(head(chickwts))
+
+```
+#### **Data tail**
+
+```{r}
+
+knitr::kable (tail(chickwts))
+
+```
+#### **Summary Data:**
+
+
+```{r}
+knitr::kable((summary(chickwts)))
+
+```
+
+
+
+####  **Descriptive statistics:** 
+
+
+
+show the distribution of weight compare to type of feed.
+
+```{r}
+boxplot(weight~feed,data=chickwts, main="Chicken Weights",
+        ylab="Weight", xlab="Feed") 
+```
+
+
+
+
+
+#### **To get the mean and the SD of the dataset:**
+
+```{r}
+chickwts %>% 
+  group_by(feed) %>% 
+  summarise(n = n(),
+            avg = mean(weight), 
+            sd1 = sd(weight)) %>%
+  knitr::kable()
+
+```
+
+####  **Including Plots:**
+
+```{r}
+ggplot (chickwts, aes(feed, weight)) +
+  geom_jitter(width = 0.3) +
+  stat_summary(fun.data = mean_sdl, 
+               fun.args = list(mult = 1), 
+               col = "red")
+```
+
+
+
+#### **inferential statistics:** 
+##### **Anova**
+
+```{r}
+knitr::kable(anova (fm1 <- lm(weight ~ feed, data = chickwts)))
+
+```
+
+
+
+
+
+#### **Histogram of residuals:**
+```{r}
+residuals <- resid(lm(weight ~ feed, chickwts))
+hist(residuals)
+```
+
