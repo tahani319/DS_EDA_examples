@@ -11,7 +11,7 @@ This repository contains my EDA case studies i wrok on them as part of my course
 - ##### irrigation 
 - ##### chicken weights
 
-i do them in R and markdown 
+I do them in R and markdown 
 
 
-i do some analysis, explore data, do some analysis and data visualization
+I do some analysis, explore data  and data visualization
